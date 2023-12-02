@@ -1,2 +1,2 @@
 # pr-bypass
-run
+run-local
